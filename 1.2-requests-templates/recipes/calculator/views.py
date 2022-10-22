@@ -19,6 +19,34 @@ DATA = {
     # можете добавить свои рецепты ;)
 }
 
+def home(request):
+    context = {
+        'data': DATA,
+    }
+    return render(request, 'home.html', context)
+
+def find_recipe(request, recipe):
+    amount = int(request.GET.get('servings', 1))
+    recipe.update((key, value * amount) for key, value in recipe.items())
+
+    context = {
+        'recipe': recipe
+    }
+
+    return render(request, 'calculator/index.html',context)
+
+def omlet(request):
+    recipe = DATA['omlet']
+    return find_recipe(request, recipe)
+
+def pasta(request):
+    recipe = DATA['pasta']
+    return find_recipe(request, recipe)
+
+def buter(request):
+    recipe = DATA['buter']
+    return find_recipe(request, recipe)
+
 # Напишите ваш обработчик. Используйте DATA как источник данных
 # Результат - render(request, 'calculator/index.html', context)
 # В качестве контекста должен быть передан словарь с рецептом:
