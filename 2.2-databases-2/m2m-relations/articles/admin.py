@@ -11,8 +11,10 @@ class RelationshipInlineFormset(BaseInlineFormSet):
         for form in self.forms:
             if form.cleaned_data and form.cleaned_data['is_main']:
                 check_main += 1
-            if check_main > 1:
-                raise ValidationError('Разрешен только один основной тэг')
+        if check_main > 1:
+            raise ValidationError('Разрешен только один основной тэг')
+        elif check_main == 0:
+            raise ValidationError('Укажите основной тэг')
         return super().clean()
 
 
