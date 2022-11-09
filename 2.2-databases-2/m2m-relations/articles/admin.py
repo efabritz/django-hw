@@ -7,15 +7,13 @@ from .models import Article, Scope, Tag
 
 class RelationshipInlineFormset(BaseInlineFormSet):
     def clean(self):
+        check_main = 0
         for form in self.forms:
-            # В form.cleaned_data будет словарь с данными
-            # каждой отдельной формы, которые вы можете проверить
-            form.cleaned_data
-            # вызовом исключения ValidationError можно указать админке о наличие ошибки
-            # таким образом объект не будет сохранен,
-            # а пользователю выведется соответствующее сообщение об ошибке
-           # raise ValidationError('Тут всегда ошибка')
-        return super().clean()  # вызываем базовый код переопределяемого метода
+            if form.cleaned_data and form.cleaned_data['is_main']:
+                check_main += 1
+            if check_main > 1:
+                raise ValidationError('Разрешен только один основной тэг')
+        return super().clean()
 
 
 class RelationshipInline(admin.TabularInline):
