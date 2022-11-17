@@ -7,12 +7,12 @@ from .serializers import SensorSerializer, MeasurementSerializer, SensorDetailSe
 from measurement.models import Sensor, Measurement
 
 
-class CreateSensor(CreateAPIView):
+class CreateListSensor(CreateAPIView, ListCreateAPIView):
      queryset = Sensor.objects.all()
      serializer_class = SensorSerializer
 
 
-class ChangeSensor(RetrieveUpdateAPIView):
+class ChangeShowSensor(RetrieveUpdateAPIView, ListCreateAPIView):
      queryset = Sensor.objects.all()
      serializer_class = SensorSerializer
 
@@ -20,13 +20,3 @@ class ChangeSensor(RetrieveUpdateAPIView):
 class CreateMeasurement(CreateAPIView):
      queryset = Measurement.objects.all()
      serializer_class = MeasurementSerializer
-
-
-class ShowSensorsList(ListCreateAPIView):
-     queryset = Sensor.objects.all()
-     serializer_class = SensorSerializer
-
-
-class ShowSensorInformation(RetrieveAPIView):
-     queryset = Sensor.objects.all()
-     serializer_class = SensorDetailSerializer

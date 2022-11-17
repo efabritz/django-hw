@@ -1,4 +1,15 @@
-POST http://localhost:8000/api/create_sensor/
+# примеры API-запросов
+
+@baseUrl = http://localhost:8000/api
+
+# получение датчиков
+GET {{baseUrl}}/sensors/
+Content-Type: application/json
+
+###
+
+# создание датчика
+POST {{baseUrl}}/sensors/
 Content-Type: application/json
 
 {
@@ -8,7 +19,8 @@ Content-Type: application/json
 
 ###
 
-PATCH http://localhost:8000/api/change_sensor/1/
+# обновление датчика
+PATCH {{baseUrl}}/sensors/1/
 Content-Type: application/json
 
 {
@@ -17,30 +29,17 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:8000/api/measurements/
-Content-Type: application/json
-
-{
-  "sensor": 4,
-  "temperature": 199.6
-}
-
-###
-GET http://localhost:8000/api/sensors
-Content-Type: application/json
-
-###
-
-GET http://localhost:8000/api/sensor/4/
-Content-Type: application/json
-
-###
-
-POST http://localhost:8000/api/measurements/
+# добавление измерения
+POST {{baseUrl}}/measurements/
 Content-Type: application/json
 
 {
   "sensor": 1,
-  "temperature": 46.6,
-  "image": "http://localhost:8000/media/images/testimage.jpg"
+  "temperature": 22.3
 }
+
+###
+
+# получение информации по датчику
+GET {{baseUrl}}/sensors/1/
+Content-Type: application/json
