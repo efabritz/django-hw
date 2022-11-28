@@ -4,9 +4,17 @@ from advertisements.models import Advertisement
 
 
 class AdvertisementFilter(filters.FilterSet):
-    """Фильтры для объявлений."""
+        status = filters.ModelMultipleChoiceFilter(
+                field_name="status",
+                to_field_name="status",
+                queryset=Advertisement.objects.all(),
+        )
+        created_at_after = filters.DateFilter(field_name='created_at', lookup_expr='gte')
+        created_at_before = filters.DateFilter(field_name='created_at', lookup_expr='lte')
 
-    # TODO: задайте требуемые фильтры
 
-    class Meta:
-        model = Advertisement
+        class Meta:
+                model = Advertisement
+
+                fields = ('status', 'created_at', 'updated_at')
+                ordering = ('status', 'created_at', 'updated_at')
