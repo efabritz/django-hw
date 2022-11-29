@@ -41,6 +41,9 @@ class StockSerializer(serializers.ModelSerializer):
         # обновляем склад по его параметрам
         stock = super().update(instance, validated_data)
 
+        if len(positions) > 0:
+            StockProduct.objects.filter(stock=stock.id).delete()
+
         for position in positions:
             StockProduct.objects.create(stock=stock, product=position['product'], quantity=position['quantity'],
                                         price=position['price'])

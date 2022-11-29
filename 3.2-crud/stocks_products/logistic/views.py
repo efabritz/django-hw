@@ -20,19 +20,7 @@ class StockViewSet(ModelViewSet):
     search_fields = ['^products__title', '^products__description']
     filterset_fields = ['products']
 
-# 1
-# DELETE {{baseUrl}}/stocks/1
-# Content-Type: application/json
-# HTTP/1.1 301 Moved Permanently
-# Date: Mon, 21 Nov 2022 13:35:43 GMT
-# Server: WSGIServer/0.2 CPython/3.8.10
-# Content-Type: text/html; charset=utf-8
-# Location: /api/v1/stocks/1/
-# Content-Length: 0
-# X-Content-Type-Options: nosniff
-# Referrer-Policy: same-origin
-# Cross-Origin-Opener-Policy: same-origin
-
+#
 # 2
 # обновляем записи на складе ---
 # PATCH {{baseUrl}}/stocks/4/
